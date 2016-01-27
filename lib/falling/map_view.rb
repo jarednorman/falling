@@ -1,21 +1,27 @@
 require 'curses'
 
+require 'falling/view'
+
 module Falling
-  class MapView
+  class MapView < View
     def initialize(universe:)
       @universe = universe
-      @window = Curses::Window.new(
-        Curses.lines, Curses.cols * 3 / 5,
-        0, 0
-      )
+      super()
     end
 
     def refresh
-      window.noutrefresh
+      window.setpos 1, 1
+      window.addstr rand.to_s
+      super
     end
 
     private
 
-    attr_reader :window
+    def calculate_geometry!
+      @width = Curses.cols * 3 / 5
+      @height = Curses.lines
+      @row = 0
+      @column = 0
+    end
   end
 end

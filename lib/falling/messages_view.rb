@@ -1,14 +1,12 @@
 require 'curses'
 
+require 'falling/view'
+
 module Falling
-  class MessagesView
+  class MessagesView < View
     def initialize(universe:)
       @universe = universe
-
-      @window = Curses::Window.new(
-        Curses.lines, Curses.cols * 2 / 5,
-        0, Curses.cols * 3 / 5
-      )
+      super()
     end
 
     def step!
@@ -16,11 +14,17 @@ module Falling
     end
 
     def refresh
-      window.noutrefresh
+      window.box(0, 0)
+      super
     end
 
     private
 
-    attr_reader :window
+    def calculate_geometry!
+      @width = Curses.cols * 2 / 5
+      @height = Curses.lines
+      @row = 0
+      @column = Curses.cols * 3 / 5
+    end
   end
 end
