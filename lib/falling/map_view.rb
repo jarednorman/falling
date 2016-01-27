@@ -10,12 +10,20 @@ module Falling
     end
 
     def refresh
-      window.setpos 1, 1
-      window.addstr rand.to_s
+      universe.
+        active_area.
+        to_a[0, height].
+        each_with_index do |row_string, row_index|
+          window.setpos row_index, 0
+          window.addstr row_string[0, width]
+        end
+
       super
     end
 
     private
+
+    attr_reader :universe
 
     def calculate_geometry!
       @width = Curses.cols * 3 / 5
