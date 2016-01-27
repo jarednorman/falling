@@ -1,4 +1,4 @@
-# Falling
+# Falling [![Build Status](https://travis-ci.org/porkchopclub/porkchop.svg?branch=master)](https://travis-ci.org/porkchopclub/porkchop)
 
 Nothing to see here. Just some exploratory programming.
 
