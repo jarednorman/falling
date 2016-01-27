@@ -30,8 +30,6 @@ module Falling
       @messages_view ||= MessagesView.new(universe: universe)
     end
 
-    private
-
     def with_screen
       Curses.init_screen
       begin
