@@ -18,7 +18,17 @@ module Falling
     def step!
       character = window.getch
       Falling.logger.debug "User input: #{character.inspect}."
-      character != "q"
+
+      case character
+      when "q"
+        return false
+      when "?"
+        add_message(Messaging::Message.new(
+          "Controls:\n - q to quit\n - literally nothing else"
+        ))
+      end
+
+      true
     end
 
     def add_message(message)
