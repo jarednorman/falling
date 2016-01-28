@@ -24,7 +24,7 @@ module Falling
         return false
       when "?"
         add_message(Messaging::Message.new(
-          "Controls:\n - q to quit\n - literally nothing else"
+                      "Controls:\n - q to quit\n - literally nothing else"
         ))
       end
 
