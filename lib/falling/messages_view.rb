@@ -21,7 +21,7 @@ module Falling
     private
 
     def calculate_geometry!
-      @width = Curses.cols * 2 / 5
+      @width = Curses.cols - Curses.cols * 3 / 5
       @height = Curses.lines
       @row = 0
       @column = Curses.cols * 3 / 5
