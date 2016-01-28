@@ -5,6 +5,7 @@ require 'falling/view'
 module Falling
   class MapView < View
     def initialize(universe:)
+      Falling.logger.info "Initializing MapView."
       @universe = universe
       super()
     end

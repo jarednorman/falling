@@ -9,7 +9,9 @@ require 'falling/interface'
 module Falling
   class << self
     def start_game
+      logger.info 'Booting up.'
       Interface.new(universe: Falling::Universe.new).run!
+      logger.info 'Quitting.'
     ensure
       log_file.close
       log_file.unlink if log_file.is_a? Tempfile

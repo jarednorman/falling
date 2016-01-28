@@ -31,12 +31,14 @@ module Falling
     end
 
     def with_screen
+      Falling.logger.info "Initializing screen."
       Curses.init_screen
       begin
         Curses.crmode
         Curses.noecho
         yield
       ensure
+        Falling.logger.info "Closing screen."
         Curses.close_screen
       end
     end

@@ -5,12 +5,15 @@ require 'falling/view'
 module Falling
   class MessagesView < View
     def initialize(universe:)
+      Falling.logger.info "Initializing MapView."
       @universe = universe
       super()
     end
 
     def step!
-      window.getch != "q"
+      character = window.getch
+      Falling.logger.debug "User input: \"#{character}\"."
+      character != "q"
     end
 
     def refresh
