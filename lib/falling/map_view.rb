@@ -10,6 +10,7 @@ module Falling
       super()
     end
 
+    # FIXME: Add smart camera centering.
     def refresh
       active_area.
         to_a[0, height].
