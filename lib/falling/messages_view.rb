@@ -10,7 +10,7 @@ module Falling
     end
 
     def step!
-      window.getch
+      window.getch != "q"
     end
 
     def refresh
