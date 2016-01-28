@@ -3,7 +3,7 @@ require 'falling/area'
 module Falling
   class Universe
     def active_area
-      Area.new
+      @active_area ||= Area.new
     end
   end
 end
