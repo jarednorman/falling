@@ -17,7 +17,6 @@ module Falling
     def step!
       character = window.getch
       Falling.logger.debug "User input: #{character.inspect}."
-      add_message Messaging::Message.new "You pressed #{character.inspect}."
       character != "q"
     end
 
