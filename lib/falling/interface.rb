@@ -1,9 +1,14 @@
 require 'falling/map_view'
 require 'falling/messages_view'
+require 'falling/player'
 
 module Falling
   class Interface
-    def initialize(universe:)
+    attr_reader :player
+
+    def initialize(universe:,
+                   player: true)
+      create_player! if player
       @universe = universe
     end
 
@@ -41,6 +46,10 @@ module Falling
         Falling.logger.info "Closing screen."
         Curses.close_screen
       end
+    end
+
+    def create_player!
+      @player = Player.new
     end
   end
 end
