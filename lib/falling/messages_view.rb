@@ -10,7 +10,8 @@ module Falling
     def initialize(universe:)
       Falling.logger.info "Initializing MapView."
       @universe = universe
-      add_message(Messaging::Message.new("Butt"))
+      add_message(Messaging::Message.new("Welcome to Falling."))
+      add_message(Messaging::Message.new("Press ? for help."))
       super()
     end
 
@@ -35,7 +36,7 @@ module Falling
     private
 
     def draw_messages
-      offset = height - 1
+      offset = text_height
       messages.each do |message|
         message_height = message.height(at_width: text_width)
         offset -= message_height
@@ -45,6 +46,7 @@ module Falling
           window.addstr text
         end
       end
+      window.setpos text_height, 1
     end
 
     def calculate_geometry!
@@ -56,6 +58,10 @@ module Falling
 
     def text_width
       width - 2
+    end
+
+    def text_height
+      height - 2
     end
 
     def messages
