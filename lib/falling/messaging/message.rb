@@ -10,6 +10,8 @@ module Falling
         format(for_width: at_width).length
       end
 
+      # FIXME: This doesn't support strings with newlines, or actually break
+      # words properly.
       def format(for_width:)
         text.scan(/.{1,#{for_width}}/)
       end
