@@ -4,9 +4,11 @@ require 'falling/view'
 
 module Falling
   class MapView < View
-    def initialize(universe:)
+    def initialize(universe:,
+                   player: nil)
       Falling.logger.info "Initializing MapView."
       @universe = universe
+      @player = player
       super()
     end
 
@@ -24,7 +26,8 @@ module Falling
 
     private
 
-    attr_reader :universe
+    attr_reader :universe,
+                :player
 
     def active_area
       universe.active_area

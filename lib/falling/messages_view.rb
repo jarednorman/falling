@@ -7,9 +7,11 @@ module Falling
   class MessagesView < View
     MAX_MESSAGES = 64
 
-    def initialize(universe:)
+    def initialize(universe:,
+                   player: nil)
       Falling.logger.info "Initializing MapView."
       @universe = universe
+      @player = player
       add_message(Messaging::Message.new("Welcome to Falling."))
       add_message(Messaging::Message.new("Press ? for help."))
       super()
@@ -44,6 +46,8 @@ module Falling
     end
 
     private
+
+    attr_reader :player
 
     def draw_messages
       offset = text_height

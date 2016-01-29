@@ -28,11 +28,13 @@ module Falling
     attr_reader :universe
 
     def map_view
-      @map_view ||= MapView.new(universe: universe)
+      @map_view ||= MapView.new(universe: universe,
+                                player: player)
     end
 
     def messages_view
-      @messages_view ||= MessagesView.new(universe: universe)
+      @messages_view ||= MessagesView.new(universe: universe,
+                                          player: player)
     end
 
     def with_screen
