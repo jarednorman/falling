@@ -1,3 +1,5 @@
+require 'falling/node'
+
 module Falling
   class Area
     attr_reader :width,
