@@ -10,7 +10,9 @@ module Falling
   class << self
     def start_game
       logger.info 'Booting up.'
-      Interface.new(universe: Falling::Universe.new).run!
+      universe = Universe.new
+      Node.universe = universe
+      Interface.new(universe: universe).run!
       logger.info 'Quitting.'
     ensure
       log_file.close
