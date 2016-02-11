@@ -1,4 +1,5 @@
 require 'falling/node/reference'
+require 'falling/node/references'
 
 module Falling
   class Node
@@ -26,30 +27,14 @@ module Falling
       end
 
       def references(name)
-        variable_name = "@#{name}_identifiers"
-        identifiers_getter_name = "#{name}_identifiers"
-        insert_name = "insert_#{name}"
-        delete_name = "delete_#{name}"
+        reference_name = "@#{name}_reference"
 
-        define_method(identifiers_getter_name) do
-          instance_variable_set(
-            variable_name,
-            instance_variable_get(variable_name) || Set.new
-          )
+        define_method(reference_name) do
+          references[name] ||= References.new(self, name)
         end
 
         define_method(name) do
-          Set.new public_send(identifiers_getter_name).map do |identifier|
-            universe.fetch_node(identifier)
-          end
-        end
-
-        define_method(insert_name) do |node|
-          public_send(identifiers_getter_name) << node.identifier
-        end
-
-        define_method(delete_name) do |node|
-          public_send(identifiers_getter_name).delete(node.identifier)
+          public_send(reference_name).fetch
         end
       end
     end

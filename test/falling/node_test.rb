@@ -59,15 +59,15 @@ module Falling
       backpack = backpack_class.new
       apple = item_class.new
       lime = item_class.new
-      assert_equal Set.new, backpack.contents
-      backpack.insert_contents apple
-      assert_equal Set.new([apple]), backpack.contents
-      backpack.insert_contents lime
-      assert_equal Set.new([apple, lime]), backpack.contents
-      backpack.delete_contents apple
-      assert_equal Set.new([lime]), backpack.contents
-      backpack.delete_contents lime
-      assert_equal Set.new, backpack.contents
+      assert_equal Set.new, Set.new(backpack.contents)
+      backpack.contents.add apple
+      assert_equal Set.new([apple]), Set.new(backpack.contents)
+      backpack.contents.add lime
+      assert_equal Set.new([apple, lime]), Set.new(backpack.contents)
+      backpack.contents.delete apple
+      assert_equal Set.new([lime]), Set.new(backpack.contents)
+      backpack.contents.delete lime
+      assert_equal Set.new, Set.new(backpack.contents)
     end
 
     private
