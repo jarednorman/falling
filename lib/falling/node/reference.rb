@@ -29,7 +29,7 @@ module Falling
 
         unless fetch.respond_to? inverse
           raise MissingInverseReferenceError,
-            "Inverse node was missing #{inverse.inspect} reference."
+                "Inverse node was missing #{inverse.inspect} reference."
         end
 
         fetch.

@@ -19,6 +19,5 @@ module Falling
                   :name,
                   :identifiers
     end
-
   end
 end
