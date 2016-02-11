@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'falling/map_view'
 require 'falling/messages_view'
 require 'falling/player'

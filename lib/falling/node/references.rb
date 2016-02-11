@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'falling/node/references_proxy'
 
 module Falling

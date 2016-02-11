@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Falling
   module Messaging
     class Message
