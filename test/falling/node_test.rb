@@ -36,6 +36,23 @@ module Falling
       assert_nil cat.mother
     end
 
+    def test_bidirectional_references
+      employee_class = Class.new(Node) { reference :mentor, inverse: :student }
+      mentor = employee_class.new
+      student = employee_class.new
+      assert_nil mentor.mentor
+      assert_nil student.mentor
+      assert_raises(Node::MissingInverseReferenceError) do
+        student.mentor = mentor
+      end
+      employee_class.class_eval { reference :student, inverse: :student }
+      student.mentor = mentor
+      assert_equal student.mentor, mentor
+      assert_equal mentor.student, student
+      assert_nil student.student
+      assert_nil mentor.mentor
+    end
+
     private
 
     def mock_universe
