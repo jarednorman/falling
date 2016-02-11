@@ -26,6 +26,10 @@ release a new version, update the version number in `version.rb`, and then run
 git commits and tags, and push the `.gem` file to
 [rubygems.org](https://rubygems.org).
 
+## Documentation
+
+It's available [here](http://www.rubydoc.info/github/jarednorman/falling/).
+
 ## Contributing
 
 _This project is not currently seeking contributions._
