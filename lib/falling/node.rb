@@ -3,19 +3,26 @@ require 'falling/node/reference'
 require 'falling/node/references'
 
 module Falling
+  # Node is the superclass for representing anything that exists concretely in
+  # the Falling universe (a chair, a sword, a person, a tile).
   class Node
     class MissingInverseReferenceError < StandardError; end
 
+    # @return [String] the node's unique identifier
     attr_reader :identifier
 
     class << self
+      # @return [Falling::Universe]
       attr_accessor :universe
 
-      def reference(name, *arguments)
+      # Adds a one-to-one reference to this class
+      # @param name [Symbol] the name of the reference
+      # @option options [Symbol] inverse the name of the inverse reference
+      def reference(name, *options)
         reference_name = "#{name}_reference"
 
         define_method(reference_name) do
-          references[name] ||= Reference.new(self, name, *arguments)
+          references[name] ||= Reference.new(self, name, *options)
         end
 
         define_method(name) do
@@ -27,6 +34,8 @@ module Falling
         end
       end
 
+      # Adds a one-to-many reference to this class
+      # @param name [Symbol] the name of the reference
       def references(name)
         reference_name = "@#{name}_reference"
 
@@ -45,10 +54,12 @@ module Falling
       universe.add_node(self)
     end
 
+    # Destroys this node, removing it from the universe
     def destroy!
       universe.remove_node(self)
     end
 
+    # @return [Falling::Universe] the universe that this node exists in
     def universe
       Node.universe
     end
