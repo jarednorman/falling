@@ -53,6 +53,23 @@ module Falling
       assert_nil mentor.mentor
     end
 
+    def test_one_to_many_references
+      backpack_class = Class.new(Node) { references :contents }
+      item_class = Class.new(Node)
+      backpack = backpack_class.new
+      apple = item_class.new
+      lime = item_class.new
+      assert_equal Set.new, backpack.contents
+      backpack.insert_contents apple
+      assert_equal Set.new([apple]), backpack.contents
+      backpack.insert_contents lime
+      assert_equal Set.new([apple, lime]), backpack.contents
+      backpack.delete_contents apple
+      assert_equal Set.new([lime]), backpack.contents
+      backpack.delete_contents lime
+      assert_equal Set.new, backpack.contents
+    end
+
     private
 
     def mock_universe
