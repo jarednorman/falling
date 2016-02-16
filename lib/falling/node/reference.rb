@@ -9,8 +9,14 @@ module Falling
       end
 
       def set(node, force: false)
-        self.identifier = node.identifier
-        set_inverse_reference! unless force
+        case node
+        when Node
+          self.identifier = node.identifier
+          set_inverse_reference! unless force
+        when nil
+          self.identifier = nil
+          # FIXME: unset inverse too!
+        end
       end
 
       def fetch

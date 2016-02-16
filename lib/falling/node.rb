@@ -6,6 +6,7 @@ module Falling
   # Node is the superclass for representing anything that exists concretely in
   # the Falling universe (a chair, a sword, a person, a tile).
   class Node
+    # Raised when a write is attempted on an inverse that doesn't exist.
     class MissingInverseReferenceError < StandardError; end
 
     # @return [String] the node's unique identifier
@@ -36,11 +37,11 @@ module Falling
 
       # Adds a one-to-many reference to this class
       # @param name [Symbol] the name of the reference
-      def references(name)
+      def references(name, *options)
         reference_name = "@#{name}_reference"
 
         define_method(reference_name) do
-          references[name] ||= References.new(self, name)
+          references[name] ||= References.new(self, name, *options)
         end
 
         define_method(name) do
